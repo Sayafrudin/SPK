@@ -16,7 +16,7 @@ class KriteriaController extends Controller
 
     public function create()
     {
-        return view('spk.create');
+        return view('spk.kriteria-create');
     }
 
     public function store(Request $request)
@@ -45,14 +45,14 @@ class KriteriaController extends Controller
     {
         $kriterias = Kriteria::findOrFail($id_kriteria);
         
-        return view('spk.edit', compact('kriterias'));
+        return view('spk.kriteria-edit', compact('kriterias'));
     }
 
     public function update(Request $request, $id_kriteria)
     {
         $request->validate([
             'kode_kriteria' => 'required',
-            'nama_kriteria' => 'required',
+            'nama_kriteria' => 'required|regex:/[a-zA-Z ]/',
             'tipe_kriteria' => 'required|in:Benefit,Cost',
             'bobot' => 'required|integer',
         ]);
