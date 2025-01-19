@@ -36,12 +36,24 @@ Route::get('/spk/kriteria', [KriteriaController::class, 'index'])->name('spk.kri
 Route::get('/spk/kriteria/create', [KriteriaController::class, 'create'])->name('spk.create');
 Route::post('/spk/kriteria/store', [KriteriaController::class, 'store'])->name('spk.store');
 Route::delete('/spk/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('spk.destroy');
-Route::get('/spk/kriteria/{id}/edit', [KriteriaController::class, 'edit'])->name('spk.edit');
+Route::get('/spk/kriteria/{id}/edit', [KriteriaController::class, 'edit'])->name('spk.kriteria-edit');
 Route::put('/spk/kriteria/{id}', [KriteriaController::class, 'update'])->name('spk.update');
 Route::get('/spk/alternatif', [AlternatifController::class, 'index'])->name('spk.alternatif');
 
 Route::get('/parameter/kadaluwarsa', [ParamKadaluwarsaController::class, 'index'])->name('parameter.kadaluwarsa');
+Route::get('/parameter/kadaluwarsa/create', [ParamKadaluwarsaController::class, 'create'])->name('parameter.create');
+Route::post('/parameter/kadaluwarsa/store', [ParamKadaluwarsaController::class, 'store'])->name('parameter.store');
+Route::delete('/parameter/kadaluwarsa/{id}', [ParamKadaluwarsaController::class, 'destroy'])->name('parameter.destroy');
+Route::get('/parameter/kadaluwarsa/{id}/edit', [ParamKadaluwarsaController::class, 'edit'])->name('parameter.kadaluwarsa-edit');
+Route::put('/parameter/kadaluwarsa/{id}', [ParamKadaluwarsaController::class, 'update'])->name('parameter.update');
+
 Route::get('/parameter/obat-khusus', [ParamObatKhususController::class, 'index'])->name('parameter.obat-khusus');
+Route::get('/parameter/obat-khusus/create', [ParamObatKhususController::class, 'create'])->name('parameter.khusus_create');
+Route::post('/parameter/obat-khusus/store', [ParamObatKhususController::class, 'store'])->name('parameter.khusus_store');
+Route::delete('/parameter/obat-khusus/{id}', [ParamObatKhususController::class, 'destroy'])->name('parameter.khusus_destroy');
+Route::get('parameter/obat-khusus/{id}/edit', [ParamObatKhususController::class, 'edit'])->name('parameter.khusus-edit');
+Route::put('/parameter/obat-khusus/{id}', [ParamObatKhususController::class, 'update'])->name('parameter.khusus_update');
+
 Route::get('/laporan/perhitungan-perangkingan', [PerhitunganController::class, 'index'])->name('laporan.perhitungan');
 
 Route::get('/obat/excel', function () {
