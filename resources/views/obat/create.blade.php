@@ -16,8 +16,7 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <div>
                                     <x-input-label for="nama_obat" :value="__('Nama Obat')" />
-                                    <x-text-input id="nama_obat" class="mt-1 w-full" type="text"
-                                        name="nama_obat" />
+                                    <x-text-input id="nama_obat" class="mt-1 w-full" type="text" name="nama_obat" />
                                 </div>
                                 <div>
                                     <x-input-label class="mb-1" for="id_parameter_obat_khusus" :value="__('Tipe Obat')" />
@@ -26,8 +25,10 @@
                                         <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled>Pilih Tipe Obat</option>
-                                            <option value="1">Obat Generik</option>
-                                            <option value="2">Obat Keras</option>
+                                            @foreach ($parameterObatKhusus as $parameter)
+                                                <option value="{{ $parameter->id_parameter_obat_khusus }}">
+                                                    {{ $parameter->tipe_obat }}</option>
+                                            @endforeach
                                         </select>
                                     </form>
                                 </div>
@@ -35,8 +36,7 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <div>
                                     <x-input-label for="harga" :value="__('Harga')" />
-                                    <x-text-input id="harga" class="mt-1 w-full" type="number"
-                                        name="harga" />
+                                    <x-text-input id="harga" class="mt-1 w-full" type="number" name="harga" />
                                 </div>
 
                                 <div>
