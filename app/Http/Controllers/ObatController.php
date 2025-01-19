@@ -11,7 +11,8 @@ class ObatController extends Controller
 
     public function create()
     {
-        return view('obat.create');
+        $parameterObatKhusus = DB::table('parameter_obat_khusus')->get();
+        return view('obat.create', compact('parameterObatKhusus'));
     }
 
     public function ObatChart(Request $request)
