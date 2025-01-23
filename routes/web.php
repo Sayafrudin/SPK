@@ -23,14 +23,21 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard', [ObatController::class, 'ObatChart'])->name('dashboard');
 
 Route::get('/obat/list-obat', [ObatController::class, 'index'])->name('obat.index');
-Route::get('/obat/obat-khusus', [ObatKhususController::class, 'index'])->name('obat-khusus.index');
-Route::get('/obat/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
 Route::post('/obat/excel', [ExcelObatController::class,'import_excel']);
 Route::get('/obat/list-obat/create', [ObatController::class, 'create'])->name('obat.create');
 Route::post('/obat/list-obat/store', [ObatController::class, 'store'])->name('obat.store');
 Route::delete('/obat/list-obat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
 Route::get('/obat/list-obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
 Route::put('/obat/list-obat/{id}', [ObatController::class, 'update'])->name('obat.update');
+Route::get('/obat/obat-khusus', [ObatKhususController::class, 'index'])->name('obat-khusus.index');
+
+Route::post('/obat/excel', [ExcelObatController::class,'import_excel']);
+Route::get('/obat/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
+Route::get('/obat/penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');
+Route::post('/obat/penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
+Route::delete('/obat/penjualan/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+Route::get('/obat/penjualan/{id}/edit', [PenjualanController::class, 'edit'])->name('penjualan.edit');
+Route::put('/obat/penjualan/{id}', [PenjualanController::class, 'update'])->name('penjualan.update');
 
 Route::get('/spk/kriteria', [KriteriaController::class, 'index'])->name('spk.kriteria');
 Route::get('/spk/kriteria/create', [KriteriaController::class, 'create'])->name('spk.create');
