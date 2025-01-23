@@ -10,7 +10,7 @@ class KriteriaController extends Controller
 {
     public function index()
     {
-        $kriterias = DB::table('kriteria')->paginate(5);
+        $kriterias = DB::table('kriteria')->orderBy('kode_kriteria', 'asc')->paginate(5);
         return view('spk.kriteria', compact('kriterias'));
     }
 
@@ -27,24 +27,26 @@ class KriteriaController extends Controller
             'tipe_kriteria' => 'required|in:Benefit,Cost',
             'bobot' => 'required|integer',
         ]);
-  
+
         // Hitung total bobot yang ada
         $totalBobot = Kriteria::sum('bobot');
-  
+
         // Cek apakah total bobot + bobot baru melebihi 100
         if ($totalBobot + $request->bobot > 100) {
-            return redirect()->back()->withErrors(['message' => 'Total bobot tidak boleh melebihi 100.']);
+            return redirect()
+                ->back()
+                ->withErrors(['message' => 'Total bobot tidak boleh melebihi 100.']);
         }
 
         Kriteria::create($request->all());
-  
+
         return redirect()->route('spk.kriteria')->with('message', 'Kriteria created successfully');
     }
 
     public function edit($id_kriteria)
     {
         $kriterias = Kriteria::findOrFail($id_kriteria);
-        
+
         return view('spk.kriteria-edit', compact('kriterias'));
     }
 
@@ -56,20 +58,22 @@ class KriteriaController extends Controller
             'tipe_kriteria' => 'required|in:Benefit,Cost',
             'bobot' => 'required|integer',
         ]);
-  
+
         $kriterias = Kriteria::findOrFail($id_kriteria);
 
         // Hitung total bobot yang ada, kecuali bobot kriteria yang sedang diupdate
         $totalBobot = Kriteria::where('id_kriteria', '!=', $id_kriteria)->sum('bobot');
-  
+
         // Cek apakah bobot baru melebihi 100
         if ($totalBobot + $request->bobot > 100) {
-            return redirect()->back()->withErrors(['message' => 'Total bobot tidak boleh melebihi 100.']);
+            return redirect()
+                ->back()
+                ->withErrors(['message' => 'Total bobot tidak boleh melebihi 100.']);
         }
-  
+
         // Update kriteria
         $kriterias->update($request->all());
-  
+
         return redirect()->route('spk.kriteria')->with('message', 'Kriteria updated successfully');
     }
 
@@ -77,7 +81,7 @@ class KriteriaController extends Controller
     {
         $kriterias = Kriteria::findOrFail($id_kriteria);
         $kriterias->delete();
-  
+
         return redirect()->route('spk.kriteria')->with('message', 'Kriteria deleted successfully');
     }
 }
