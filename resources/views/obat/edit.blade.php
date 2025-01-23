@@ -23,12 +23,13 @@
                                 <div>
                                     <x-input-label class="mb-1" for="id_parameter_obat_khusus" :value="__('Tipe Obat')" />
                                     <form class="max-w-sm mx-auto">
-
                                         <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled>Pilih Kriteria</option>
-                                            <option value="1" {{ $obats->id_parameter_obat_khusus == '1' ? 'selected' : '' }}>Obat Generik</option>
-                                            <option value="2" {{ $obats->id_parameter_obat_khusus == '2' ? 'selected' : '' }}>Obat Keras</option>
+                                            @foreach ($parameterObatKhusus as $parameter)
+                                                <option value="{{ $parameter->id_parameter_obat_khusus }}">
+                                                    {{ $parameter->tipe_obat }}</option>
+                                            @endforeach
                                         </select>
                                     </form>
                                 </div>
