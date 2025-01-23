@@ -158,7 +158,7 @@
                                                                     <td class=" p-5 ">
                                                                         <div class="flex items-center gap-1">
                                                                             <a class="p-2  rounded-full  group transition-all duration-500  flex item-center"
-                                                                                href="{{ route('spk.edit', $kriteria->id_kriteria) }}">
+                                                                                href="{{ route('spk.kriteria-edit', $kriteria->id_kriteria) }}">
                                                                                 <svg class="cursor-pointer"
                                                                                     width="20" height="20"
                                                                                     viewBox="0 0 20 20" fill="none"
