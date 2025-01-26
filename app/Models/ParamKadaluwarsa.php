@@ -11,6 +11,6 @@ class ParamKadaluwarsa extends Model
 
     public $timestamps = false;
     protected $primaryKey = 'id_parameter_kadaluwarsa';
-    public $table = "parameter_kadaluwarsa";
+    public $table = 'parameter_kadaluwarsa';
     protected $fillable = ['tahun_kadaluwarsa', 'keterangan', 'bobot'];
 }
