@@ -19,11 +19,11 @@
                                     <form class="max-w-sm mx-auto">
 
                                         <select name="id_obat" id="id_obat" 
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onchange="updatePrice()"">
-                                            <option selected disabled>Pilih Tipe Obat</option>
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onchange="updatePrice()">
+                                            <option selected disabled>Pilih Obat</option>
                                             @foreach ($obats as $obat)
                                                 <option value="{{ $obat->id_obat }}" data-harga="{{ $obat->harga }}">
-                                                    {{ $obat->nama_obat }} | Rp.{{ $obat->harga }}</option>
+                                                    {{ $obat->nama_obat }} | Stok : {{ $obat->stok }} | Rp.{{ $obat->harga }}</option>
                                             @endforeach
                                         </select>
                                     </form>

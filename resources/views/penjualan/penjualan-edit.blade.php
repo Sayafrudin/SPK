@@ -24,7 +24,7 @@
                                             <option selected disabled>Pilih Tipe Obat</option>
                                             @foreach ($obats as $obat)
                                                 <option value="{{ $obat->id_obat }}" {{ $obat->id_obat == $penjualans->id_obat ? 'selected' : '' }} data-harga="{{ $obat->harga }}">
-                                                    {{ $obat->nama_obat }} | Rp.{{ $obat->harga }}</option>
+                                                    {{ $obat->nama_obat }} | Stok : {{ $obat->stok }} | Rp.{{ $obat->harga }}</option>
                                             @endforeach
                                         </select>
                                     </form>
