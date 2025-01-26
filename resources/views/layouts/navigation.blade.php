@@ -94,7 +94,7 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('laporan.perhitungan')">
-                                {{ __('Perhitungan & Perangkingan') }}
+                                {{ __('Perhitungan & Perankingan') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
