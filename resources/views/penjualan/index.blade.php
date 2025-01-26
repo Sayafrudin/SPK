@@ -18,7 +18,7 @@
                                             <div class="min-w-full inline-block align-middle">
                                                 <x-success-message />
                                                 <div
-                                                    class="grid grid-rows-2 grid-cols-4 grid-flow-col text-gray-500 focus-within:text-gray-900 mb-4">
+                                                    class="grid grid-cols-4 grid-flow-col text-gray-500 focus-within:text-gray-900">
                                                     <div class="relative text-gray-500 focus-within:text-gray-900 mb-4">
                                                         <form method="" action="">
                                                             <div class="relative max-w-sm mx-auto">
@@ -35,6 +35,54 @@
                                                                             d="M14.795 13.408l5.204 5.204a1 1 0 01-1.414 1.414l-5.204-5.204a7.5 7.5 0 111.414-1.414zM8.5 14A5.5 5.5 0 103 8.5 5.506 5.506 0 008.5 14z" />
                                                                     </svg>
                                                                 </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="row-start-2 col-span-1 mt-3 sm:mt-0 sm:ml-3">
+                                                        <!-- Form Filter -->
+                                                        <form action="{{ route('penjualan.index') }}" method="GET"
+                                                            class="mb-4">
+                                                            <div class="flex items-center justify-center">
+                                                                <div>
+                                                                    <x-input-label class="mb-1"
+                                                                        for="bulan"
+                                                                        :value="__('Bulan')" />
+                                                                    <select name="bulan" id="bulan"
+                                                                        class="w-xl mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                        <option selected value="">Semua Bulan
+                                                                        </option>
+                                                                        @foreach (range(1, 12) as $month)
+                                                                            <option value="{{ $month }}"
+                                                                                {{ request('bulan') == $month ? 'selected' : '' }}>
+                                                                                {{ date('F', mktime(0, 0, 0, $month, 10)) }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <div>
+                                                                    <x-input-label class="mb-1"
+                                                                        for="tahun"
+                                                                        :value="__('Tahun')" />
+                                                                    <select
+                                                                        class="w-xl mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                        name="tahun" id="tahun"
+                                                                        class="form-select mr-2">
+                                                                        <option value="">Semua Tahun</option>
+                                                                        @foreach (range(date('Y') - 1, date('Y') + 5) as $year)
+                                                                            <option value="{{ $year }}"
+                                                                                {{ request('tahun') == $year ? 'selected' : '' }}>
+                                                                                {{ $year }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <div>
+                                                                    <button type="submit"
+                                                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-6">Filter</button>
+                                                                </div>
+
                                                             </div>
                                                         </form>
                                                     </div>
@@ -112,7 +160,8 @@
                                                                                 class="mb-4 text-gray-500 dark:text-gray-300">
                                                                                 Are you
                                                                                 sure you want to delete
-                                                                                <strong class="text-red-500">Nama Obat :
+                                                                                <strong class="text-red-500">Nama Obat
+                                                                                    :
                                                                                     {{ $penjualan->nama_obat }}
                                                                                 </strong>?
                                                                             </p>

@@ -6,16 +6,38 @@ use Illuminate\Http\Request;
 use App\Models\Penjualan;
 use App\Models\Obat;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PenjualanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $penjualans = DB::table('penjualan')
-        ->join('obat', 'penjualan.id_obat', '=', 'obat.id_obat')
-        ->select('penjualan.*', 'obat.nama_obat')
-        ->paginate(5);
-  
+        // $penjualans = DB::table('penjualan')
+        // ->join('obat', 'penjualan.id_obat', '=', 'obat.id_obat')
+        // ->select('penjualan.*', 'obat.nama_obat')
+        // ->paginate(5);
+        
+        // Ambil bulan dan tahun dari request
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+
+        // Mulai query
+        $query = DB::table('penjualan')
+            ->join('obat', 'penjualan.id_obat', '=', 'obat.id_obat')
+            ->select('penjualan.*', 'obat.nama_obat');
+
+        // Tambahkan filter jika bulan dan tahun diberikan
+        if ($bulan) {
+            $query->whereMonth('penjualan.tanggal_penjualan', $bulan);
+        }
+
+        if ($tahun) {
+            $query->whereYear('penjualan.tanggal_penjualan', $tahun);
+        }
+
+        // Ambil data dengan paginasi
+        $penjualans = $query->paginate(5);
+
         return view('penjualan.index', compact('penjualans'));
     }
 
@@ -31,7 +53,7 @@ class PenjualanController extends Controller
             'id_obat' => 'required|exists:obat,id_obat',
             'jumlah' => 'required|integer|min:1',
             'total_harga' => 'required|integer',
-            'tanggal_penjualan' => 'required|date'
+            'tanggal_penjualan' => 'nullable|date'
         ]);
   
         // Ambil obat berdasarkan id_obat
@@ -45,12 +67,15 @@ class PenjualanController extends Controller
         // Hitung total harga
         $total_harga = $obat->harga * $request->jumlah;
   
+        // Jika tanggal_penjualan tidak diisi, gunakan tanggal sekarang
+        $tanggalPenjualan = $request->tanggal_penjualan ?? now();
+
         // Simpan data penjualan
         Penjualan::create([
             'id_obat' => $request->id_obat,
             'jumlah' => $request->jumlah,
             'total_harga' => $total_harga,
-            'tanggal_penjualan' => $request->tanggal_penjualan,
+            'tanggal_penjualan' => $tanggalPenjualan,
         ]);
   
         // Kurangi stok obat
@@ -78,13 +103,22 @@ class PenjualanController extends Controller
   
         // Ambil penjualan berdasarkan ID
         $penjualan = Penjualan::findOrFail($id_penjualan);
-        $obat = Obat::find($request->id_obat);
-  
+        $obat = Obat::find($penjualan->id_obat); // Obat yang sebelumnya terjual
+        
         // Kembalikan stok obat yang sebelumnya
-        $obatLama = Obat::find($penjualan->id_obat);
-        $obatLama->stok += $penjualan->jumlah; // Kembalikan stok lama
-        $obatLama->save();
-  
+        $obat->stok += $penjualan->jumlah; // Kembalikan stok lama
+
+        // Hitung stok yang tersedia setelah mengembalikan stok lama
+        $stokTersedia = $obat->stok - ($request->jumlah); // Hitung stok setelah update
+
+        // Cek apakah stok cukup setelah update
+        if ($stokTersedia < 0) {
+            // Kembalikan stok obat yang lama jika tidak cukup
+            $obat->stok -= $penjualan->jumlah; // Kembalikan stok ke nilai sebelumnya
+            $obat->save();
+            return redirect()->back()->withErrors(['message' => 'Stok obat tidak cukup.']);
+        }
+
         // Update data penjualan
         $penjualan->update([
             'id_obat' => $request->id_obat,
@@ -94,7 +128,7 @@ class PenjualanController extends Controller
         ]);
   
         // Kurangi stok obat yang baru
-        $obat->stok -= $request->jumlah;
+        $obat->stok -= $request->jumlah; // Kurangi stok sesuai jumlah baru
         $obat->save();
   
         return redirect()->route('penjualan.index')->with('message', 'Penjualan updated successfully.');
