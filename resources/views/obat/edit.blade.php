@@ -12,39 +12,50 @@
                     <x-input-error class="mb-4" :errors="$errors" />
                     <form action="{{ route('obat.update', $obats->id_obat) }}" method="POST">
                         @csrf
-                        @method('PUT') 
+                        @method('PUT')
                         <div class="grid grid-row-3 gap-6">
-                            <div class="grid grid-cols-2 gap-6">
+                            <div class="grid grid-cols-3 gap-6">
                                 <div>
                                     <x-input-label for="nama_obat" :value="__('Nama Obat')" />
-                                    <x-text-input id="nama_obat" class="mt-1 w-full" type="text"
-                                        name="nama_obat" value="{{ $obats->nama_obat }}"/>
+                                    <x-text-input id="nama_obat" class="mt-1 w-full" type="text" name="nama_obat"
+                                        value="{{ $obats->nama_obat }}" />
                                 </div>
                                 <div>
                                     <x-input-label class="mb-1" for="id_parameter_obat_khusus" :value="__('Tipe Obat')" />
-                                    <form class="max-w-sm mx-auto">
-                                        <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected disabled>Pilih Kriteria</option>
-                                            @foreach ($parameterObatKhusus as $parameter)
-                                                <option value="{{ $parameter->id_parameter_obat_khusus }}">
-                                                    {{ $parameter->tipe_obat }}</option>
-                                            @endforeach
-                                        </select>
-                                    </form>
+                                    <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled>Pilih Kriteria</option>
+                                        @foreach ($parameterObatKhusus as $parameter)
+                                            <option value="{{ $parameter->id_parameter_obat_khusus }}"
+                                                {{ $obats->id_parameter_obat_khusus == $parameter->id_parameter_obat_khusus ? 'selected' : '' }}>
+                                                {{ $parameter->tipe_obat }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <x-input-label class="mb-1" for="id_parameter_kadaluwarsa" :value="__('Tipe Obat')" />
+                                    <select name="id_parameter_kadaluwarsa" id="id_parameter_kadaluwarsa"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled>Pilih Kriteria</option>
+                                        @foreach ($parameterKadaluwarsa as $parameter)
+                                            <option value="{{ $parameter->id_parameter_kadaluwarsa }}"
+                                                {{ $obats->id_parameter_kadaluwarsa == $parameter->id_parameter_kadaluwarsa ? 'selected' : '' }}>
+                                                {{ $parameter->tahun_kadaluwarsa }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-6">
                                 <div>
                                     <x-input-label for="harga" :value="__('Harga')" />
-                                    <x-text-input id="harga" class="mt-1 w-full" type="number"
-                                        name="harga" value="{{ $obats->harga }}"/>
+                                    <x-text-input id="harga" class="mt-1 w-full" type="number" name="harga"
+                                        value="{{ $obats->harga }}" />
                                 </div>
 
                                 <div>
                                     <x-input-label for="stok" :value="__('Stok')" />
-                                    <x-text-input id="stok" class="block mt-1 w-full" type="number"
-                                        name="stok" value="{{ $obats->stok }}"/>
+                                    <x-text-input id="stok" class="block mt-1 w-full" type="number" name="stok"
+                                        value="{{ $obats->stok }}" />
                                 </div>
                             </div>
                             <div class="flex justify-end">

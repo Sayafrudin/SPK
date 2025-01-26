@@ -13,24 +13,32 @@
                     <form action="{{ route('obat.store') }}" method="POST">
                         @csrf
                         <div class="grid grid-row-3 gap-6">
-                            <div class="grid grid-cols-2 gap-6">
+                            <div class="grid grid-cols-3 gap-6">
                                 <div>
                                     <x-input-label for="nama_obat" :value="__('Nama Obat')" />
                                     <x-text-input id="nama_obat" class="mt-1 w-full" type="text" name="nama_obat" />
                                 </div>
                                 <div>
                                     <x-input-label class="mb-1" for="id_parameter_obat_khusus" :value="__('Tipe Obat')" />
-                                    <form class="max-w-sm mx-auto">
-
-                                        <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected disabled>Pilih Tipe Obat</option>
-                                            @foreach ($parameterObatKhusus as $parameter)
-                                                <option value="{{ $parameter->id_parameter_obat_khusus }}">
-                                                    {{ $parameter->tipe_obat }}</option>
-                                            @endforeach
-                                        </select>
-                                    </form>
+                                    <select name="id_parameter_obat_khusus" id="id_parameter_obat_khusus"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled>Pilih Tipe Obat</option>
+                                        @foreach ($parameterObatKhusus as $parameter)
+                                            <option value="{{ $parameter->id_parameter_obat_khusus }}">
+                                                {{ $parameter->tipe_obat }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <x-input-label class="mb-1" for="id_parameter_kadaluwarsa" :value="__('Tahun Kadaluwarsa')" />
+                                    <select name="id_parameter_kadaluwarsa" id="id_parameter_kadaluwarsa"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled>Pilih Tahun Kadaluwarsa</option>
+                                        @foreach ($parameterKadaluwarsa as $parameter)
+                                            <option value="{{ $parameter->id_parameter_kadaluwarsa }}">
+                                                {{ $parameter->tahun_kadaluwarsa }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-6">

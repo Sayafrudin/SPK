@@ -65,6 +65,9 @@
                                                                     class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize rounded-t-xl">
                                                                     Tipe Obat </th>
                                                                 <th scope="col"
+                                                                    class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize rounded-t-xl">
+                                                                    Tahun Kadaluwarsa </th>
+                                                                <th scope="col"
                                                                     class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
                                                                     Harga </th>
                                                                 <th scope="col"
@@ -152,6 +155,9 @@
                                                                     <td
                                                                         class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 ">
                                                                         {{ $obat->tipe_obat }}</td>
+                                                                    <td
+                                                                        class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 ">
+                                                                        {{ $obat->tahun_kadaluwarsa }}</td>
                                                                     <td
                                                                         class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                                                                         {{ $obat->harga }} </td>

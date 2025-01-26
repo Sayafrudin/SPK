@@ -27,8 +27,9 @@ class ExcelObatImport implements ToCollection, ToModel
                 $obat = new Obat();
                 $obat->nama_obat = $row[0];
                 $obat->id_parameter_obat_khusus = $row[1];
-                $obat->harga = $row[2];
-                $obat->stok = $row[3];
+                $obat->id_parameter_kadaluwarsa = $row[2];
+                $obat->harga = $row[3];
+                $obat->stok = $row[4];
                 $obat->save();
             }
         }
