@@ -45,7 +45,14 @@ Route::post('/spk/kriteria/store', [KriteriaController::class, 'store'])->name('
 Route::delete('/spk/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('spk.destroy');
 Route::get('/spk/kriteria/{id}/edit', [KriteriaController::class, 'edit'])->name('spk.kriteria-edit');
 Route::put('/spk/kriteria/{id}', [KriteriaController::class, 'update'])->name('spk.update');
+
 Route::get('/spk/alternatif', [AlternatifController::class, 'index'])->name('spk.alternatif');
+Route::get('/spk/alternatif/create', [AlternatifController::class, 'create'])->name('spk.alternatif-create');
+Route::post('/spk/alternatif/store', [AlternatifController::class, 'store'])->name('spk.alternatif-store');
+Route::get('/spk/alternatif/{id}/edit', [AlternatifController::class, 'edit'])->name('spk.alternatif-edit');
+Route::put('/spk/alternatif/{id}', [AlternatifController::class, 'update'])->name('spk.alternatif-update');
+Route::delete('/spk/alternatif/{id}', [AlternatifController::class, 'destroy'])->name('spk.alternatif-destroy');
+Route::get('/spk/alternatif/get-data/{id}', [AlternatifController::class, 'getAlternatifData'])->name('spk.alternatif-get-data');
 
 Route::get('/parameter/kadaluwarsa', [ParamKadaluwarsaController::class, 'index'])->name('parameter.kadaluwarsa');
 Route::get('/parameter/kadaluwarsa/create', [ParamKadaluwarsaController::class, 'create'])->name('parameter.create');
